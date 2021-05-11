@@ -1,10 +1,17 @@
 package com.sp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
 
+@Entity
 public class Card {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private Family family;
