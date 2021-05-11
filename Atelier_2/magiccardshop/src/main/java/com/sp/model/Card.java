@@ -3,6 +3,8 @@ package com.sp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
@@ -14,17 +16,23 @@ public class Card {
 	@GeneratedValue
 	private int id;
 	private String name;
+	private String description;
 	private Family family;
 	private Affinity affinity;
 	private int hp;
 	private int energy;
 	private int attack;
 	private int defense;
+	private int prix;
+	
+	@ManyToOne
+	@JoinColumn(name="USR_USER_ID")
+    private User owner;
 	
 	public Card() {
 	}
 
-	public Card(int id, String name, Family family, Affinity affinity, int hp, int energy, int attack, int defense) {
+	public Card(int id, String name, String description, Family family, Affinity affinity, int hp, int energy, int attack, int defense, int prix) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,6 +106,22 @@ public class Card {
 
 	public void setDefense(int defense) {
 		this.defense = defense;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getPrix() {
+		return prix;
+	}
+
+	public void setPrix(int prix) {
+		this.prix = prix;
 	}
 	
 	@Override
