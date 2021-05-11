@@ -19,6 +19,7 @@ public class Card {
 	private String description;
 	private Family family;
 	private Affinity affinity;
+	private String imgUrl;
 	private int hp;
 	private int energy;
 	private int attack;
@@ -28,16 +29,17 @@ public class Card {
 	@ManyToOne
 	@JoinColumn(name="USR_USER_ID")
     private User owner;
-	
+
 	public Card() {
 	}
 
-	public Card(int id, String name, String description, Family family, Affinity affinity, int hp, int energy, int attack, int defense, int prix) {
+	public Card(int id, String name, String description, Family family, Affinity affinity, String imgUrl, int hp, int energy, int attack, int defense, int prix) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.family = family;
 		this.affinity = affinity;
+		this.imgUrl = imgUrl;
 		this.hp = hp;
 		this.energy = energy;
 		this.attack = attack;
@@ -74,6 +76,14 @@ public class Card {
 
 	public void setAffinity(Affinity affinity) {
 		this.affinity = affinity;
+	}
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public int getHp() {
@@ -122,6 +132,15 @@ public class Card {
 
 	public void setPrix(int prix) {
 		this.prix = prix;
+	}
+	
+	
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 	
 	@Override

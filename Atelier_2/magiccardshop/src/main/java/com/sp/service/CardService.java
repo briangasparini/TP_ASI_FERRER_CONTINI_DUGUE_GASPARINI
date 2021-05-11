@@ -15,8 +15,7 @@ public class CardService {
 	CardRepository cRepository;
 	
 	public void addCard(Card h) {
-		Card createdCard=cRepository.save(h);
-		System.out.println(createdCard);
+		cRepository.save(h);
 	}
 	
 	public Card getCard(int id) {
@@ -27,16 +26,5 @@ public class CardService {
 			return null;
 		}
 	}
-
-	/*
-	public void addCard(Card h) {
-		System.out.println(h);
-	}
-
-	public Card getCard(int id) {
-		Card h = new Card(1, "Pikachu", Family.ETOILES3, Affinity.ELECTRIC, 50, 80, 60, 20);
-		return h;
-	}
-	*/
 
 }
