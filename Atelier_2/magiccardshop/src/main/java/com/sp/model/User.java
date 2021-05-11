@@ -16,7 +16,6 @@ public class User {
 	private int wallet;
 	private String login;
 	private String password;
-	private boolean isConnected;
 	
 	public User() {
 		
@@ -29,7 +28,6 @@ public class User {
 		this.wallet = wallet;
 		this.login = login;
 		this.password = password;
-		this.setConnected(false);
 	}
 	
 	public int getId() {
@@ -70,14 +68,6 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public boolean isConnected() {
-		return isConnected;
-	}
-
-	public void setConnected(boolean isConnected) {
-		this.isConnected = isConnected;
 	}
 	
 }

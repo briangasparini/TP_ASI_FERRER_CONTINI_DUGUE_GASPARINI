@@ -16,12 +16,12 @@ public class CardController {
 	@Autowired
     CardService cService;
 
-	@RequestMapping(method=RequestMethod.POST,value="/Card")
+	@RequestMapping(method=RequestMethod.POST,value="/cards")
     public void addCard(@RequestBody Card Card) {
         cService.addCard(Card);
     }
     
-    @RequestMapping(method=RequestMethod.GET,value="/Card/{id}")
+    @RequestMapping(method=RequestMethod.GET,value="/cards/{id}")
     public Card getCard(@PathVariable String id) {
         return cService.getCard(Integer.valueOf(id));
     }

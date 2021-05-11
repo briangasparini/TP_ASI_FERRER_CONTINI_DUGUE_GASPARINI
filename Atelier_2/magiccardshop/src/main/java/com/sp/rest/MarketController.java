@@ -1,5 +1,6 @@
 package com.sp.rest;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,41 +14,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sp.model.Card;
 import com.sp.model.User;
+import com.sp.service.MarketService;
 import com.sp.service.UserService;
 
 @RestController
-public class UserController {
+public class MarketController {
 	
 	@Autowired
-    UserService uService;
+    MarketService mService;
 	
 	@Autowired
 	AuthController aController;
-	
-	@RequestMapping(method=RequestMethod.POST,value="/users")
-    public void addUser(@RequestBody User User) {
-        uService.addUser(User);
-    }
-    
-    @RequestMapping(method=RequestMethod.GET,value="/users/{id}")
-    public User getUser(@PathVariable String id) {
-        User u=uService.getUser(Integer.valueOf(id));
-        if(u != null) {
-        	return u;
-        }
-        return null;
-    }
-    
-    @RequestMapping(method=RequestMethod.POST,value="/users/{id}/cards")
-    public List<Card> getCards(@RequestHeader("encoded-token") String encodedToken, 
-    						   @RequestParam int userId) {
+	    
+    @RequestMapping(method=RequestMethod.POST,value="/buy")
+    public Boolean buyCard(@RequestHeader("encoded-token") String encodedToken,
+    							@RequestBody User user, Card card) {
     	if (aController.checkToken(encodedToken)) {
-            return uService.getCards(userId);
+            return mService.buyCard(user, card);
     	}
-    	return null;
+    	return false;
     }
     
-    
+    @RequestMapping(method=RequestMethod.POST,value="/sell")
+    public Boolean sellCard(@RequestHeader("encoded-token") String encodedToken, 
+    						@RequestBody User user, Card card) {
+    	if (aController.checkToken(encodedToken)) {
+            return mService.sellCard(user, card);
+    	}
+    	return false;
+    }
 
 }
 
