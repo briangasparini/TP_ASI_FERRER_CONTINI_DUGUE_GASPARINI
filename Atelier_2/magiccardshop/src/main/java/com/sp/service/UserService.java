@@ -1,5 +1,6 @@
 package com.sp.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sp.model.Card;
 import com.sp.model.User;
+import com.sp.repository.CardRepository;
 import com.sp.repository.UserRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class UserService {
 
 	@Autowired
 	UserRepository uRepository;
+
+	@Autowired
+	CardRepository cRepository;
 	
 	public void addUser(User h) {
 		uRepository.save(h);
@@ -70,4 +75,8 @@ public class UserService {
 		return false;
 	}
 
+	
+	public List<Card> getCards(int userId){
+		return cRepository.findUserCards(userId);
+	}
 }

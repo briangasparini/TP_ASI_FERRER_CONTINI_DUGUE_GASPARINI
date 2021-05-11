@@ -23,8 +23,7 @@ public class CardController {
     
     @RequestMapping(method=RequestMethod.GET,value="/Card/{id}")
     public Card getCard(@PathVariable String id) {
-        Card h=cService.getCard(Integer.valueOf(id));
-        return h;
+        return cService.getCard(Integer.valueOf(id));
     }
 
 }
