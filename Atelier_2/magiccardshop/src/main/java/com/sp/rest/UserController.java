@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sp.model.Card;
-import com.sp.model.User;
+import com.sp.model.dto.CardDTO;
+import com.sp.model.dto.UserDTO;
 import com.sp.service.UserService;
 
 @RestController
@@ -25,13 +25,13 @@ public class UserController {
 	AuthController aController;
 	
 	@RequestMapping(method=RequestMethod.POST,value="/users")
-    public void addUser(@RequestBody User User) {
+    public void addUser(@RequestBody UserDTO User) {
         uService.addUser(User);
     }
     
     @RequestMapping(method=RequestMethod.GET,value="/users/{id}")
-    public User getUser(@PathVariable String id) {
-        User u=uService.getUser(Integer.valueOf(id));
+    public UserDTO getUser(@PathVariable String id) {
+        UserDTO u=uService.getUserDto(Integer.valueOf(id));
         if(u != null) {
         	return u;
         }
@@ -39,8 +39,8 @@ public class UserController {
     }
     
     @RequestMapping(method=RequestMethod.POST,value="/users/{id}/cards")
-    public List<Card> getCards(@RequestHeader("encoded-token") String encodedToken, 
-    						   @RequestParam int userId) {
+    public List<CardDTO> getCards(@RequestHeader("encoded-token") String encodedToken, 
+    						      @RequestParam int userId) {
     	if (aController.checkToken(encodedToken)) {
             return uService.getCards(userId);
     	}

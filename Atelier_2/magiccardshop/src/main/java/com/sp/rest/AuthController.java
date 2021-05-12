@@ -27,7 +27,7 @@ public class AuthController {
         return uService.disconnectUser();
     }
     
-    public Boolean checkToken(String encodedToken) {
+    public boolean checkToken(String encodedToken) {
     	byte[] decodedBytes = Base64.getDecoder().decode(encodedToken);
     	String decodedString = new String(decodedBytes);
     	String[] parts = decodedString.split("/");

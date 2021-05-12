@@ -5,7 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sp.model.Card;
+import com.sp.mapper.CardMapper;
+import com.sp.model.dto.CardDTO;
 import com.sp.repository.CardRepository;
 
 @Service
@@ -13,16 +14,18 @@ public class CardService {
 
 	@Autowired
 	CardRepository cRepository;
-	
-	public void addCard(Card h) {
-		cRepository.save(h);
+
+	CardMapper cMapper;
+
+	public void addCard(CardDTO card) {
+		cRepository.save(cMapper.convertCard(card));
 	}
-	
-	public Card getCard(int id) {
-		Optional<Card> hOpt =cRepository.findById(id);
+
+	public CardDTO getCard(int id) {
+		Optional<CardDTO> hOpt = cRepository.findById(id).map(card -> cMapper.convertCardDto(card));
 		if (hOpt.isPresent()) {
 			return hOpt.get();
-		}else {
+		} else {
 			return null;
 		}
 	}
