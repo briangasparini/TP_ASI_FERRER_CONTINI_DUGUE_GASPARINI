@@ -9,6 +9,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+./Atelier_2/magiccardshop/.classpath
+./Atelier_2/magiccardshop/.project
 
 # External tool builders
 .externalToolBuilders/
