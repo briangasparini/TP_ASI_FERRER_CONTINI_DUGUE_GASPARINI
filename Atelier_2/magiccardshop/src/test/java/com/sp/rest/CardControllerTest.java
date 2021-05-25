@@ -15,7 +15,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.sp.mapper.CardMapper;
 import com.sp.model.Card;
+import com.sp.model.User;
+import com.sp.model.dto.CardDTO;
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
 import com.sp.service.CardService;
@@ -44,13 +47,17 @@ public class CardControllerTest {
 	private Family family = Family.ETOILE1;
 	private Affinity affinity = Affinity.BUG;
 	
-	Card mockHero = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix);
+	private User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
+	
+	Card mockCard = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner);
+	CardMapper mapper = new CardMapper();
+	CardDTO mockCardDto = mapper.convertCardDto(mockCard);
 	
 	@Test
 	public void retrieveCard() throws Exception {
 		Mockito.when(
 				cardService.getCard(Mockito.anyInt())
-				).thenReturn(mockHero);
+				).thenReturn(mockCardDto);
 				
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/cards/50").accept(MediaType.APPLICATION_JSON);

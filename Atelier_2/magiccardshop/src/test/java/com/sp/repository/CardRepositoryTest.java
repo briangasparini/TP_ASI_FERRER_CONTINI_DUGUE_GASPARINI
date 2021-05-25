@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sp.model.Card;
+import com.sp.model.User;
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
 
@@ -35,6 +36,8 @@ public class CardRepositoryTest {
 	private Family family = Family.ETOILE1;
 	private Affinity affinity = Affinity.BUG;
 	
+	private User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
+	
 	@Autowired
 	CardRepository cardRepo;
 	
@@ -50,7 +53,7 @@ public class CardRepositoryTest {
 	@Test
     public void saveCard() {
         cardRepo.save(
-    		new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix)
+    		new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner)
 		);
         
         assertTrue(true);
@@ -60,7 +63,7 @@ public class CardRepositoryTest {
     public void saveAndGetCard() {
         cardRepo.deleteAll();
         cardRepo.save(
-    		new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix)
+    		new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner)
 		);
         List<Card> cardList = new ArrayList<>();
         cardRepo.findAll().forEach(cardList::add);
@@ -82,10 +85,10 @@ public class CardRepositoryTest {
 
     @Test
     public void findByName() {
-        cardRepo.save(new Card(1, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix));
-        cardRepo.save(new Card(2, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix));
-        cardRepo.save(new Card(3, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix));
-        cardRepo.save(new Card(4, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix));
+        cardRepo.save(new Card(1, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner));
+        cardRepo.save(new Card(2, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner));
+        cardRepo.save(new Card(3, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner));
+        cardRepo.save(new Card(4, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner));
         
         List<Card> cardList = new ArrayList<>();
         cardRepo.findByName(name).forEach(cardList::add);
