@@ -1,0 +1,17 @@
+# image docker (container virtuel) pour executer les jobs (e.g effectuer le build de l'application)
+image: "maven:3-jdk-8"
+
+# commandes à executer sur le container virtuel (e.g ajout d'outils non dispo sur l'image de base)
+before_script:
+  - echo "I am a script executed before"
+
+# definition de l'ordre d'execution des jobs 
+# (e.g tous les jobs qui ont 'state:build' seront executés en premiers, puis tous les jobs de 'state:test' etc..)
+stages:
+  - build
+
+# definition d'un job, à quelle étape il sera executé (stage), le script a executé (e.g mvn compile)
+job_build:
+  stage: build
+  script:
+    - mvn compile
