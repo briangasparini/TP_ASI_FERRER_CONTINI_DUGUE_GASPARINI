@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import com.sp.mapper.CardMapper;
 import com.sp.model.Card;
 import com.sp.model.User;
@@ -47,12 +46,13 @@ public class CardControllerTest {
 	private Family family = Family.ETOILE1;
 	private Affinity affinity = Affinity.BUG;
 	
+
 	private User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
 	
 	Card mockCard = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner);
 	CardMapper mapper = new CardMapper();
 	CardDTO mockCardDto = mapper.convertCardDto(mockCard);
-	
+
 	@Test
 	public void retrieveCard() throws Exception {
 		Mockito.when(

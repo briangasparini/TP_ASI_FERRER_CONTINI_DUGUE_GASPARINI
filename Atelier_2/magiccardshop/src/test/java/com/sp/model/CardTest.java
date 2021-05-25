@@ -42,7 +42,7 @@ public class CardTest {
 		User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
 		
 		Card card = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner);
-		
+
 		System.out.println(
 				"id: "+id
 				+", hp: "+hp
@@ -88,7 +88,7 @@ public class CardTest {
 		
 		Family family = Family.ETOILE1;
 		Affinity affinity = Affinity.BUG;
-		
+
 		User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
 		
 		Card card = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner);

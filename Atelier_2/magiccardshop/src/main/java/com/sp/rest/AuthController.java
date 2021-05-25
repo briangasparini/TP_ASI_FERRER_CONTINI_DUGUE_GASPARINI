@@ -19,7 +19,8 @@ public class AuthController {
 	
     @RequestMapping(method=RequestMethod.POST,value="/login")
     public String connectUser(@RequestBody String login, String hashedPassword) {
-        return uService.connectUser(login, hashedPassword);
+    	System.out.println("login : " + login);
+    	return uService.connectUser(login, hashedPassword);
     }
     
     @RequestMapping(method=RequestMethod.POST,value="/logout")

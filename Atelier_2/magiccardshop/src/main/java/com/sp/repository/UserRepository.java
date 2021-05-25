@@ -13,10 +13,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
 	public List<User> findByName(String name);
 	
-	@Query(value = "SELECT * FROM User WHERE login=:login AND password=:hashedPassword", nativeQuery = true)
 	public Optional<User> findByLoginAndPassword(String login, String hashedPassword);
 	
-	@Query(value = "UPDATE User SET wallet=:newWallet WHERE userId=:userId", nativeQuery = true)
+	@Query(value = "UPDATE user SET wallet=:newWallet WHERE userId=:userId", nativeQuery = true)
 	@Modifying
 	public void saveNewBalance(int userId, int newWallet);
 
