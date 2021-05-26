@@ -34,7 +34,7 @@ public class UserService {
 	CardMapper cMapper;
 
 	public void addUser(UserDTO h) {
-		uRepository.save(uMapper.convertUser(h));
+		uRepository.save(UserMapper.convertUser(h));
 	}
 
 	public String connectUser(String login, String hashedPassword) {
@@ -52,7 +52,7 @@ public class UserService {
 	}
 
 	public UserDTO getUserDto(int id) {
-		Optional<UserDTO> uOpt = uRepository.findById(id).map(user -> uMapper.convertUserDto(user));
+		Optional<UserDTO> uOpt = uRepository.findById(id).map(user -> UserMapper.convertUserDto(user));
 		if (uOpt.isPresent()) {
 			return uOpt.get();
 		} else {
@@ -60,8 +60,17 @@ public class UserService {
 		}
 	}
 
-	public User getUser(int id) {
+	public User getUserById(int id) {
 		Optional<User> uOpt = uRepository.findById(id);
+		if (uOpt.isPresent()) {
+			return uOpt.get();
+		} else {
+			return null;
+		}
+	}
+	
+	public UserDTO getUserByLogin(String login) {
+		Optional<UserDTO> uOpt = uRepository.findByLogin(login).map(user -> UserMapper.convertUserDto(user));
 		if (uOpt.isPresent()) {
 			return uOpt.get();
 		} else {

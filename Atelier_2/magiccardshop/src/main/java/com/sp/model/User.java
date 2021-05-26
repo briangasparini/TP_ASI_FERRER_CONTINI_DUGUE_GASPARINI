@@ -20,7 +20,7 @@ public class User {
 	private String login;
 	private String password;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "owner")
 	private List<Card> listCard;
 		
 	public User() {

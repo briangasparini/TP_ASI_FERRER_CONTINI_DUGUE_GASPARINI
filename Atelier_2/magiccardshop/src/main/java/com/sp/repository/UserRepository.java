@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import com.sp.model.User;
 
@@ -15,8 +16,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	public Optional<User> findByLoginAndPassword(String login, String hashedPassword);
 	
-	@Query(value = "UPDATE user SET wallet=:newWallet WHERE userId=:userId", nativeQuery = true)
 	@Modifying
-	public void saveNewBalance(int userId, int newWallet);
+	@Query(value = "UPDATE user u SET u.wallet=:newWallet WHERE u.id=:userId")
+	public void saveNewBalance(@Param("userId") int userId, @Param("newWallet")  int newWallet);
+
+	public Optional<User> findByLogin(String login);
 
 }

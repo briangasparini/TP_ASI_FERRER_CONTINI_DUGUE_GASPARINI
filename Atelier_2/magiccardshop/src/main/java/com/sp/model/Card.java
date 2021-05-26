@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.sp.model.dto.UserDTO;
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
 

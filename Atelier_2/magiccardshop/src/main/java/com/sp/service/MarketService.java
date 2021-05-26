@@ -1,17 +1,20 @@
 package com.sp.service;
 
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sp.mapper.CardMapper;
 import com.sp.mapper.UserMapper;
-import com.sp.model.User;
 import com.sp.model.dto.CardDTO;
 import com.sp.model.dto.UserDTO;
 import com.sp.repository.CardRepository;
 import com.sp.repository.UserRepository;
 
 @Service
+@Transactional
 public class MarketService {
 
 	@Autowired
@@ -26,9 +29,10 @@ public class MarketService {
 	UserMapper uMapper;
 	CardMapper cMapper;
 	
+	@Transactional
 	public Boolean sellCard(UserDTO user, CardDTO card) {
 		
-		UserDTO admin = uMapper.convertUserDto(uService.getUser(Integer.valueOf(0)));
+		UserDTO admin = UserMapper.convertUserDto(uService.getUserById(Integer.valueOf(0)));
 		
 		// On crédite le vendeur
 		user.setWallet(user.getWallet() + card.getPrix());
@@ -40,16 +44,17 @@ public class MarketService {
 		card.setOwner(admin);
 		
 		// Sauvegarde dans la BDD
-		cRepository.saveNewOwner(card.getId(), admin.getId());
+		cRepository.saveNewOwner(UserMapper.convertUser(user), admin.getId());
 		uRepository.saveNewBalance(user.getId(), user.getWallet());
 		uRepository.saveNewBalance(admin.getId(), admin.getWallet());
 
 		return true;
 	}
-
+	
+	@Transactional
 	public boolean buyCard(UserDTO user, CardDTO card) {
 		
-		UserDTO admin = uMapper.convertUserDto(uService.getUser(Integer.valueOf(0)));
+		UserDTO admin = UserMapper.convertUserDto(uService.getUserById(Integer.valueOf(0)));
 		
 		// Si l'user a assez de fonds
 		if(user.getWallet() > card.getPrix()) {
@@ -64,7 +69,7 @@ public class MarketService {
 			admin.setWallet(admin.getWallet() + card.getPrix());
 			
 			// Sauvegarde dans la BDD
-			cRepository.saveNewOwner(card.getId(), user.getId());
+			cRepository.saveNewOwner(UserMapper.convertUser(user), card.getId());
 			uRepository.saveNewBalance(user.getId(), user.getWallet());
 			uRepository.saveNewBalance(admin.getId(), admin.getWallet());
 			

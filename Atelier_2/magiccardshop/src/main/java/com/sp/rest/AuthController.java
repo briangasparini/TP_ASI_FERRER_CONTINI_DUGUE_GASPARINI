@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sp.model.User;
 import com.sp.service.UserService;
 
@@ -18,7 +19,10 @@ public class AuthController {
     UserService uService;
 	
     @RequestMapping(method=RequestMethod.POST,value="/login")
-    public String connectUser(@RequestBody String login, String hashedPassword) {
+    public String connectUser(@RequestBody ObjectNode objectNode) {
+    	String login = objectNode.get("login").asText();
+    	String hashedPassword = objectNode.get("password").asText();
+    	
     	return uService.connectUser(login, hashedPassword);
     }
     
@@ -32,8 +36,8 @@ public class AuthController {
     	String decodedString = new String(decodedBytes);
     	String[] parts = decodedString.split("/");
     	int userId = Integer.parseInt(parts[2]);
-    	User u = uService.getUser(Integer.valueOf(userId));
-    	if(u.getPassword() == parts[1] && u.getLogin() == parts[0]) {
+    	User u = uService.getUserById(Integer.valueOf(userId));
+    	if(u.getPassword().equals(parts[1]) && u.getLogin().equals(parts[0])) {
     		return true;
     	}
     	return false;

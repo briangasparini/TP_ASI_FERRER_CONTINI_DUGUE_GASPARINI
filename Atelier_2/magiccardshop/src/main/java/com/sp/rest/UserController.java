@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sp.model.dto.CardDTO;
@@ -40,9 +39,9 @@ public class UserController {
     
     @RequestMapping(method=RequestMethod.GET,value="/users/{id}/cards")
     public List<CardDTO> getCards(@RequestHeader("encoded-token") String encodedToken, 
-    						      @RequestParam int userId) {
+    							  @PathVariable String id) {
     	if (aController.checkToken(encodedToken)) {
-            return uService.getCards(userId);
+            return uService.getCards(Integer.valueOf(id));
     	}
     	return null;
     }
