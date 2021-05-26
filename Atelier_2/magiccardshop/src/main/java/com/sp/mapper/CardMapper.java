@@ -11,6 +11,6 @@ public class CardMapper {
 	}
 
 	public Card convertCard(CardDTO cardDto) {
-		return new Card(cardDto.getId(), cardDto.getName(), cardDto.getDescription(), cardDto.getFamily(), cardDto.getAffinity(), cardDto.getImgUrl(), cardDto.getHp(), cardDto.getEnergy(), cardDto.getAttack(), cardDto.getDefense(), cardDto.getPrix(), cardDto.getOwner());
+		return new Card(cardDto.getId(), cardDto.getName(), cardDto.getDescription(), cardDto.getFamily(), cardDto.getAffinity(), cardDto.getImgUrl(), cardDto.getHp(), cardDto.getEnergy(), cardDto.getAttack(), cardDto.getDefense(), cardDto.getPrix(), UserMapper.convertUser(cardDto.getOwner()));
 	}
 }

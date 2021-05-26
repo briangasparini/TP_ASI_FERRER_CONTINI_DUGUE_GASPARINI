@@ -38,7 +38,7 @@ public class UserController {
         return null;
     }
     
-    @RequestMapping(method=RequestMethod.POST,value="/users/{id}/cards")
+    @RequestMapping(method=RequestMethod.GET,value="/users/{id}/cards")
     public List<CardDTO> getCards(@RequestHeader("encoded-token") String encodedToken, 
     						      @RequestParam int userId) {
     	if (aController.checkToken(encodedToken)) {

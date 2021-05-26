@@ -1,5 +1,6 @@
 package com.sp.model.dto;
 
+import com.sp.mapper.UserMapper;
 import com.sp.model.User;
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
@@ -16,7 +17,8 @@ public class CardDTO {
 	private int attack;
 	private int defense;
 	private int prix;
-    private User owner;
+    private UserDTO owner;
+    
     
     public CardDTO() {
     	
@@ -36,7 +38,7 @@ public class CardDTO {
 		this.attack = attack;
 		this.defense = defense;
 		this.prix = prix;
-		this.owner = owner;
+		this.owner = UserMapper.convertUserDto(owner);
 	}
     
        
@@ -106,10 +108,10 @@ public class CardDTO {
 	public void setPrix(int prix) {
 		this.prix = prix;
 	}
-	public User getOwner() {
+	public UserDTO getOwner() {
 		return owner;
 	}
-	public void setOwner(User owner) {
+	public void setOwner(UserDTO owner) {
 		this.owner = owner;
 	}
 }

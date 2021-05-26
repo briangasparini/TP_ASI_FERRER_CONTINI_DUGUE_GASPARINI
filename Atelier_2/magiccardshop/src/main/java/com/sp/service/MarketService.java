@@ -28,7 +28,7 @@ public class MarketService {
 	
 	public Boolean sellCard(UserDTO user, CardDTO card) {
 		
-		User admin = uService.getUser(Integer.valueOf(0));
+		UserDTO admin = uMapper.convertUserDto(uService.getUser(Integer.valueOf(0)));
 		
 		// On crédite le vendeur
 		user.setWallet(user.getWallet() + card.getPrix());
@@ -49,7 +49,7 @@ public class MarketService {
 
 	public boolean buyCard(UserDTO user, CardDTO card) {
 		
-		User admin = uService.getUser(Integer.valueOf(0));
+		UserDTO admin = uMapper.convertUserDto(uService.getUser(Integer.valueOf(0)));
 		
 		// Si l'user a assez de fonds
 		if(user.getWallet() > card.getPrix()) {
@@ -58,7 +58,7 @@ public class MarketService {
 			user.setWallet(user.getWallet() - card.getPrix());
 			
 			// On le définit comme nouveau owner
-			card.setOwner(uMapper.convertUser(user));
+			card.setOwner(user);
 			
 			// On crédite l'admin 
 			admin.setWallet(admin.getWallet() + card.getPrix());

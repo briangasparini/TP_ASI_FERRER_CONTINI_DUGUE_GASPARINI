@@ -1,11 +1,14 @@
 package com.sp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.sp.model.dto.UserDTO;
 import com.sp.model.enumeration.Affinity;
 import com.sp.model.enumeration.Family;
 
@@ -17,7 +20,9 @@ public class Card {
 	private int id;
 	private String name;
 	private String description;
+	@Enumerated(EnumType.ORDINAL)
 	private Family family;
+	@Enumerated(EnumType.ORDINAL)
 	private Affinity affinity;
 	private String imgUrl;
 	private int hp;

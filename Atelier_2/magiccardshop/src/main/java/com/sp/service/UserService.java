@@ -19,6 +19,11 @@ import com.sp.repository.UserRepository;
 @Service
 public class UserService {
 
+	public UserService() {
+		this.uMapper = new UserMapper();
+		this.cMapper = new CardMapper();
+	}
+
 	@Autowired
 	UserRepository uRepository;
 

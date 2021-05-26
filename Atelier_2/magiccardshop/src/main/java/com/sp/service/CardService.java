@@ -11,11 +11,11 @@ import com.sp.repository.CardRepository;
 
 @Service
 public class CardService {
-
+	
 	@Autowired
 	CardRepository cRepository;
 
-	CardMapper cMapper;
+	CardMapper cMapper = new CardMapper();
 
 	public void addCard(CardDTO card) {
 		cRepository.save(cMapper.convertCard(card));
