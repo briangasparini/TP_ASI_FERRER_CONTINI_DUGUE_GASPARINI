@@ -50,8 +50,7 @@ public class CardControllerTest {
 	private User owner = new User(1, "John Doe", 50, "jde755", "M0t_D€_P@s$é");
 	
 	Card mockCard = new Card(id, name, description, family, affinity, imgUrl, hp, energy, attack, defense, prix, owner);
-	CardMapper mapper = new CardMapper();
-	CardDTO mockCardDto = mapper.convertCardDto(mockCard);
+	CardDTO mockCardDto = CardMapper.convertCardDto(mockCard);
 
 	@Test
 	public void retrieveCard() throws Exception {

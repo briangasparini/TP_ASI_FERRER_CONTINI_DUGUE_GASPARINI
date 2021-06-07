@@ -54,8 +54,7 @@ public class CardServiceTest {
 			cardRepo.findById(Mockito.any())
 		).thenReturn(Optional.ofNullable(tmpCard));
 		
-		CardMapper mapper = new CardMapper();
-		Card cardInfo = mapper.convertCard(cardServ.getCard(45));
+		Card cardInfo = CardMapper.convertCard(cardServ.getCard(45));
 		
 		assertTrue(cardInfo.toString().equals(tmpCard.toString()));
 	}

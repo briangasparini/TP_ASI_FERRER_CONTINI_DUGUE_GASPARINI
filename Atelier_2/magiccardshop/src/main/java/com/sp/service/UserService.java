@@ -19,19 +19,11 @@ import com.sp.repository.UserRepository;
 @Service
 public class UserService {
 
-	public UserService() {
-		this.uMapper = new UserMapper();
-		this.cMapper = new CardMapper();
-	}
-
 	@Autowired
 	UserRepository uRepository;
 
 	@Autowired
 	CardRepository cRepository;
-
-	UserMapper uMapper;
-	CardMapper cMapper;
 
 	public void addUser(UserDTO h) {
 		uRepository.save(UserMapper.convertUser(h));
@@ -81,7 +73,7 @@ public class UserService {
 	public List<CardDTO> getCards(int userId) {
 		User user = uRepository.findById(userId)
 				.orElseThrow(() -> new RuntimeException("Error : Can't get cards linked to user : " + userId));
-		return user.getListCard().stream().map(card -> cMapper.convertCardDto(card)).collect(Collectors.toList());
+		return user.getListCard().stream().map(card -> CardMapper.convertCardDto(card)).collect(Collectors.toList());
 	}
 
 }
